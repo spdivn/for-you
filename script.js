@@ -201,18 +201,38 @@ function resetNo() {
   noBtn.style.left = noBtn.style.top = "";
 }
 
+// Yes grows a bit at every attempt, up to 600px wide (or the screen width on phones).
+// It grows by real size (not transform) so it stays centered in the row.
+const YES_MAX = 600;
+let yesBase = null;
+function growYes() {
+  if (!yesBase) {
+    yesBase = {
+      w: yesBtn.offsetWidth,
+      h: yesBtn.offsetHeight,
+      font: parseFloat(getComputedStyle(yesBtn).fontSize),
+    };
+  }
+  const maxW = Math.min(YES_MAX, document.documentElement.clientWidth - 32);
+  const k = Math.min(1 + attempts * 0.4, maxW / yesBase.w);
+  yesBtn.style.width = yesBase.w * k + "px";
+  yesBtn.style.height = yesBase.h * k + "px";
+  yesBtn.style.fontSize = yesBase.font * k + "px";
+}
+
 function runAway(e) {
   e.preventDefault();
   e.stopPropagation();
   attempts++;
   $("#no-message").textContent = CONFIG.noMessages[(attempts - 1) % CONFIG.noMessages.length];
-  yesBtn.style.transform = `scale(${Math.min(1 + attempts * 0.12, 1.8)})`;
+  growYes();
 
   if (!noBtn.classList.contains("runaway")) {
     // lift off from where it is, so the first move is smooth too
     const r = noBtn.getBoundingClientRect();
     noPlaceholder.style.cssText = `display:inline-block;width:${r.width}px;height:${r.height}px`;
     noBtn.replaceWith(noPlaceholder);
+    noPlaceholder.style.display = "none"; // Yes stays centered
     document.body.appendChild(noBtn);
     noBtn.classList.add("runaway");
     placeNo(r.left, r.top);

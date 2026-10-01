@@ -199,7 +199,19 @@ p { margin-bottom: 18px; line-height: 1.5; }
 /* Step 5 */
 .no-message { min-height: 1.6em; color: var(--rose); font-weight: 600; }
 
-#yes-btn { transition: transform 0.2s; }
+/* let the growing Yes button spill out of the card instead of being clipped */
+.step[data-step="5"] {
+  overflow: visible;
+  max-height: none;
+}
+
+#yes-btn {
+  flex: none; /* never shrink: it may grow wider than the card, up to 600px */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.5s ease, height 0.5s ease, font-size 0.5s ease, transform 0.15s;
+}
 
 .btn.no {
   background: #888;
