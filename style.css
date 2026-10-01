@@ -1,0 +1,247 @@
+:root {
+  --pink: #ff6b9d;
+  --rose: #e63e73;
+  --soft: #fff0f5;
+  --ink: #5a2a3c;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Quicksand", system-ui, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(160deg, #ffe0ec, #ffc2d9 55%, #ff9fc0);
+  overflow-x: hidden;
+}
+
+#bg-hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bg-heart {
+  position: absolute;
+  bottom: -40px;
+  opacity: 0.5;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  to { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.progress {
+  position: fixed;
+  top: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.progress span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.progress span.on { background: var(--rose); transform: scale(1.25); }
+
+.step {
+  display: none;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+  border-radius: 24px;
+  padding: 32px 22px;
+  max-height: 80vh;
+  overflow: auto;
+  box-shadow: 0 10px 40px rgba(230, 62, 115, 0.25);
+}
+
+.step.active { display: block; animation: pop 0.5s ease; }
+
+@keyframes pop {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+h1, h2 {
+  font-family: "Dancing Script", cursive;
+  color: var(--rose);
+  margin-bottom: 14px;
+}
+
+h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); }
+h2 { font-size: clamp(1.9rem, 7vw, 2.5rem); }
+
+p { margin-bottom: 18px; line-height: 1.5; }
+.big { font-size: 1.35rem; font-weight: 600; }
+
+.btn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--pink), var(--rose));
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 28px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(230, 62, 115, 0.35);
+  transition: transform 0.15s, opacity 0.2s;
+}
+
+.btn:hover:not(:disabled) { transform: scale(1.06); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn.secondary { background: #fff; color: var(--rose); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.hidden { display: none; }
+
+.row { display: flex; gap: 14px; justify-content: center; margin: 12px 0; flex-wrap: wrap; }
+
+/* Step 2 */
+.catch-area {
+  position: relative;
+  height: 200px;
+  margin-bottom: 8px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+.catch-heart {
+  position: absolute;
+  font-size: 2.2rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  animation: bob 2s ease-in-out infinite;
+}
+
+.catch-heart.caught { animation: none; transform: scale(2); opacity: 0; transition: 0.4s; }
+
+@keyframes bob {
+  50% { transform: translateY(-10px); }
+}
+
+.counter { font-weight: 600; }
+
+/* Step 3 */
+.reasons { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;
+  max-height: 30vh;
+  overflow: auto; }
+
+.reason {
+  background: var(--soft);
+  border-left: 5px solid var(--pink);
+  border-radius: 12px;
+  padding: 12px 14px;
+  text-align: left;
+  animation: pop 0.5s ease;
+}
+
+/* Step 4 */
+.letter {
+  background: #fffaf3;
+  border-radius: 12px;
+  padding: 20px 18px;
+  margin-bottom: 18px;
+  text-align: left;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  background-image: repeating-linear-gradient(transparent 0 27px, #f3d9e2 27px 28px);
+  cursor: pointer;
+  max-height: 55vh;
+  overflow-y: auto;
+  background-attachment: local;
+}
+
+.letter-text {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.4rem;
+  line-height: 28px;
+  white-space: pre-line;
+  min-height: 140px;
+  margin: 0;
+}
+
+.letter-text.typing::after { content: "|"; animation: blink 0.8s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.letter-from {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.4rem;
+  color: var(--rose);
+  text-align: right;
+  margin: 8px 0 0;
+}
+
+/* Step 5 */
+.no-message { min-height: 1.6em; color: var(--rose); font-weight: 600; }
+
+#yes-btn { transition: transform 0.2s; }
+
+.btn.no {
+  background: #888;
+  box-shadow: none;
+}
+
+.btn.no.runaway {
+  position: fixed;
+  margin: 0;
+  /* soft glide, no overshoot so it never leaves the screen */
+  transition: left 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              top 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.2s ease;
+  z-index: 10;
+}
+
+/* Step 6 */
+.finale { font-size: clamp(2.6rem, 12vw, 4rem); animation: beat 1.2s ease-in-out infinite; }
+
+@keyframes beat {
+  50% { transform: scale(1.06); }
+}
+
+.signature {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.8rem;
+  color: var(--rose);
+}
+
+.confetti {
+  position: fixed;
+  top: -30px;
+  z-index: 5;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-heart, .catch-heart, .finale { animation: none; }
+  .step.active { animation: none; }
+}

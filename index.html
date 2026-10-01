@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>For You ❤️</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="bg-hearts" aria-hidden="true"></div>
+
+  <main id="app">
+    <div class="progress" id="progress" aria-hidden="true"></div>
+
+    <!-- Step 1: Welcome -->
+    <section class="step active" data-step="1">
+      <h1 id="welcome-title"></h1>
+      <p>I made something little, just for you.</p>
+      <button class="btn" data-next>Start 💕</button>
+    </section>
+
+    <!-- Step 2: Catch the hearts -->
+    <section class="step" data-step="2">
+      <h2>Catch my hearts</h2>
+      <p>Tap 5 hearts to unlock the next surprise.</p>
+      <div id="catch-area" class="catch-area"></div>
+      <p class="counter"><span id="catch-count">0</span> / 10</p>
+      <button class="btn" id="catch-next" data-next disabled>Next</button>
+    </section>
+
+    <!-- Step 3: Reasons -->
+    <section class="step" data-step="3">
+      <h2>Why I love you</h2>
+      <div id="reasons" class="reasons"></div>
+      <button class="btn secondary" id="reason-btn">Show a reason</button>
+      <button class="btn hidden" id="reason-next" data-next>Next</button>
+    </section>
+
+    <!-- Step 4: Love letter -->
+    <section class="step" data-step="4">
+      <h2>A letter for you</h2>
+      <div class="letter" id="letter">
+        <p id="letter-text" class="letter-text"></p>
+        <p class="letter-from" id="letter-from"></p>
+      </div>
+      <button class="btn hidden" id="letter-next" data-next>Next</button>
+    </section>
+
+    <!-- Step 5: The question -->
+    <section class="step" data-step="5">
+      <h2>One important question...</h2>
+      <p class="big">Do you know how much I love you?</p>
+      <p id="no-message" class="no-message">&nbsp;</p>
+      <div class="row">
+        <button class="btn" id="yes-btn" data-next>Yes 💖</button>
+        <button class="btn no" id="no-btn">No</button>
+      </div>
+    </section>
+
+    <!-- Step 6: Finale -->
+    <section class="step" data-step="6">
+      <h1 class="finale" id="finale-title"></h1>
+      <p class="big" id="finale-text"></p>
+      <p class="signature" id="signature"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
